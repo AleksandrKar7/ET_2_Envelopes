@@ -40,7 +40,6 @@ namespace ET_2_Envelopes
                 }
                 else
                 {
-
                     if (envelopes[0].DoesFits(envelopes[1]))
                     {
                         Console.WriteLine("The second envelope will fit into the first");
