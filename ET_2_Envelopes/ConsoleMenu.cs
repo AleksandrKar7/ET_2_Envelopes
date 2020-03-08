@@ -4,29 +4,89 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ET_2_Envelopes.Data;
+
 namespace ET_2_Envelopes
 {
     static class ConsoleMenu
     {
-        public static double? GetDoubleValue(string message)
+        public static void ShowConsoleMenu(string[] inputParams)
         {
-            double result;
-            string text;
-            
-            Console.WriteLine(message);
-            text = Console.ReadLine();
+            bool isNewTry = false;
+            do
+            {
+                if (isNewTry)
+                {
+                    inputParams = AskInputParams();
+                    isNewTry = false;
+                }
 
-            if(Double.TryParse(text, out result))
-            {
-                return result;
-            }
-            else
-            {
-                return null;
-            }
+                if (!Validator.IsValid(inputParams))
+                {
+                    Console.WriteLine("Your data is not valid");
+                    if(!AskBoolValue("Do you want to retype them?",
+                        new string[] { "YES", "Y" }))
+                    {
+                        break;
+                    }
+
+                    inputParams = AskInputParams();
+                    continue;
+                }
+
+                InputData inputData = Parser.Parce(inputParams);
+                IEnvelope first = new RectangularEnvelope(
+                    inputData.LengthFirst, inputData.HeightFirst);
+
+                IEnvelope second = new RectangularEnvelope(
+                    inputData.LengthSecond, inputData.HeightSecond);
+
+                if(first.DoesFits(second) && second.DoesFits(first))
+                {
+                    Console.WriteLine("Both envelopes fit together");
+                }
+                else if (first.DoesFits(second))
+                {
+                    Console.WriteLine("The second envelope fits into the first envelope");
+                }
+                else if (second.DoesFits(first))
+                {
+                    Console.WriteLine("The first envelope fits into the second envelope");
+                }
+                else
+                {
+                    Console.WriteLine("None of the envelopes fit together");
+                }
+
+                if(AskBoolValue("Do you want to continue?", new string[] { "YES", "Y" }))
+                {
+                    isNewTry = true;
+                }
+                else
+                {
+                    break;
+                }
+            } while (true);
         }
 
-        public static bool? GetBoolValue(string message)
+        public static string[] AskInputParams()
+        {
+            string[] result = new string[InputData.CountParams];
+
+            Console.WriteLine("Enter the length for the first envelope");
+            result[0] = Console.ReadLine();
+            Console.WriteLine("Enter the height for the first envelope");
+            result[1] = Console.ReadLine();
+
+            Console.WriteLine("Enter the length for the second envelope");
+            result[2] = Console.ReadLine();
+            Console.WriteLine("Enter the height for the second envelope");
+            result[3] = Console.ReadLine();
+
+            return result;
+        }
+
+        public static bool? AskBoolValue(string message)
         {
             string text;
             string insturction;
@@ -60,7 +120,7 @@ namespace ET_2_Envelopes
             return null;
         }
 
-        public static bool GetBoolValue(string message, string[] trueArray)
+        public static bool AskBoolValue(string message, string[] trueArray)
         {
             if (trueArray == null)
             {
@@ -95,7 +155,7 @@ namespace ET_2_Envelopes
             }
         }
 
-        public static bool? GetBoolValue(string message, string[] trueArray, string[] falseArray)
+        public static bool? AskBoolValue(string message, string[] trueArray, string[] falseArray)
         {
             if (trueArray == null)
             {
