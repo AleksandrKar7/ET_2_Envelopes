@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ET_2_Envelopes.Data
 {
-    static class Parser
+    public static class Parser
     {
-        public static InputData Parce(string[] args)
+        public static InputData Parse(string[] args)
         {
             if(args == null)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ET_2_Envelopes.Data
 {
-    class InputData
+    public class InputData
     {
         public double LengthFirst { get; set; }
         public double HeightFirst { get; set; }

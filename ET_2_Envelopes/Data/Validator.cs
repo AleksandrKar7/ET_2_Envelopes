@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ET_2_Envelopes.Data
 {
-    static class Validator
+    public static class Validator
     {
         public static bool IsValid(string[] args)
         {

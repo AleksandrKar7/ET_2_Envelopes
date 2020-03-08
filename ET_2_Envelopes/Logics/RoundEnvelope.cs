@@ -25,7 +25,7 @@ namespace ET_2_Envelopes
 
         public double GetMaxSide()
         {
-            return Radius * DiameterMultiplier;
+            return 0;
         }
 
         public double GetMinSide()

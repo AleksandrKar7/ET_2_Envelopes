@@ -34,7 +34,7 @@ namespace ET_2_Envelopes
                     continue;
                 }
 
-                InputData inputData = Parser.Parce(inputParams);
+                InputData inputData = Parser.Parse(inputParams);
                 IEnvelope first = new RectangularEnvelope(
                     inputData.LengthFirst, inputData.HeightFirst);
 

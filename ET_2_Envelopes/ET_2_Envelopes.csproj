@@ -46,7 +46,7 @@
     <Compile Include="ConsoleMenu.cs" />
     <Compile Include="Logics\IEnvelope.cs" />
     <Compile Include="Data\InputData.cs" />
-    <Compile Include="Data\Parcer.cs" />
+    <Compile Include="Data\Parser.cs" />
     <Compile Include="Data\Validator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
